@@ -1,29 +1,23 @@
-package com.example.projectSpringBoot.entity;
-
+package com.example.projectSpringBoot.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@MappedSuperclass
-public abstract class BaseEntity {
-    @Id //khóa chính
-    @GeneratedValue(strategy = GenerationType.IDENTITY)//Gía trị tự động tăng
-    private Long id;
 
-    @Column
+public class AbstractDTO<T> {
+    private Long id;
     private String createdBy;
-    @Column
     private Date createdDate;
-    @Column
     private String modifiedBy;
-    @Column
     private String modifiedDate;
+    private List<T> listResult = new ArrayList<>();
 }

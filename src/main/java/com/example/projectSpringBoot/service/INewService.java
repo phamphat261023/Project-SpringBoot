@@ -9,4 +9,5 @@ import java.util.List;
 public interface INewService {
     NewDTO save(NewDTO newDTO);
     public List<NewDTO> getAllNews();
+    //NewDTO update(NewDTO newDTO);
 }

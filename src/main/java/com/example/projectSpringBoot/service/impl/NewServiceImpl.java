@@ -27,8 +27,14 @@ public class NewServiceImpl implements INewService {
 
     @Override
     public NewDTO save(NewDTO newDTO) {
+        News newEntity = new News();
+        if(newDTO.getId() != null){
+            News oldNewEntity = newRepository.findOne(newDTO.getId());
+            newEntity = newConverter.toEntity(newDTO, oldNewEntity);
+        }else{
+             newEntity = newConverter.toEntity(newDTO);
+        }
         Category category = categoryRepository.findOneByCode(newDTO.getCategoryCode());
-        News newEntity = newConverter.toEntity(newDTO);
         newEntity.setCategory(category);
         newEntity = newRepository.save(newEntity);
         return newConverter.toDTO(newEntity);
@@ -49,4 +55,16 @@ public class NewServiceImpl implements INewService {
         newDTO.setContent(newEntity.getContent());
         return newDTO;
     }
+
+    /*
+    @Override
+    public NewDTO update(NewDTO newDTO) {
+        News oldNewEntity = newRepository.findOne(newDTO.getId());
+        News newEntity = newConverter.toEntity(newDTO, oldNewEntity);
+        Category category = categoryRepository.findOneByCode(newDTO.getCategoryCode());
+        newEntity.setCategory(category);
+        newEntity = newRepository.save(newEntity);
+        return newConverter.toDTO(newEntity);
+    }
+*/
 }

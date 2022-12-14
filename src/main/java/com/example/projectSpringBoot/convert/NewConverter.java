@@ -17,10 +17,22 @@ public class NewConverter {
 
     public NewDTO toDTO(News newEntity){
         NewDTO newDTO = new NewDTO();
+        if(newEntity.getId() != null){
+            newDTO.setId(newEntity.getId());
+        }
         newDTO.setTitle(newEntity.getTitle());
         newDTO.setThumbnail(newEntity.getThumbNail());
         newDTO.setShortDescription(newEntity.getShortDescription());
         newDTO.setContent(newEntity.getContent());
         return newDTO;
     }
+
+    public News toEntity(NewDTO dto, News newEntity){
+        newEntity.setTitle(dto.getTitle());
+        newEntity.setThumbNail(dto.getThumbnail());
+        newEntity.setShortDescription(dto.getShortDescription());
+        newEntity.setContent(dto.getContent());
+        return newEntity;
+    }
+    
 }

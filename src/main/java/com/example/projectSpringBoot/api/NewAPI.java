@@ -25,9 +25,10 @@ public class NewAPI {
         return newService.save(model);
     }
 
-    @PutMapping("")
-    public NewDTO updateNew(@RequestBody NewDTO model){
-        return model;
+    @PutMapping("/{id}")
+    public NewDTO updateNew(@RequestBody NewDTO model, @PathVariable("id") long id){
+        model.setId(id);
+        return newService.save(model);
     }
 
     @DeleteMapping("")
